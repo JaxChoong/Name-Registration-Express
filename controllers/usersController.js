@@ -57,7 +57,7 @@ exports.usersUpdateGet = (req, res) => {
       res.redirect("/");
     }
   ];
-  
+
 exports.usersListGet = (req, res) => {
   res.render("index", {
     title: "User list",
@@ -71,3 +71,7 @@ exports.usersCreateGet = (req, res) => {
   });
 };
 
+exports.usersDeletePost = (req, res) => {
+  usersStorage.deleteUser(req.params.id);
+  res.redirect("/");
+};
