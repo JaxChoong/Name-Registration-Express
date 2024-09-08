@@ -13,6 +13,16 @@ const validateUser = [
   body("lastName").trim()
     .isAlpha().withMessage(`Last name ${alphaErr}`)
     .isLength({ min: 1, max: 10 }).withMessage(`Last name ${lengthErr}`),
+  body("email").trim()
+    .isEmail().withMessage("Email must be valid!"),
+  body("age")
+    .optional()
+    .trim()
+    .isInt({min:18, max:120}).withMessage("Age must be between 18 and 120!"),
+  body("bio")
+    .optional()
+    .trim()
+    .isLength({max:200}).withMessage("Maximum bio length is 200 characters!"),
 ];
 
 // We can pass an entire array of middleware validations to our controller.
@@ -26,8 +36,8 @@ exports.usersCreatePost = [
         errors: errors.array(),
       });
     }
-    const { firstName, lastName } = req.body;
-    usersStorage.addUser({ firstName, lastName });
+    const {  firstName, lastName, email, age, bio  } = req.body;
+    usersStorage.addUser({ firstName, lastName, email, age, bio  });
     res.redirect("/");
   }
 ];
