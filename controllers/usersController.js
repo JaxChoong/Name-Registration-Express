@@ -85,3 +85,25 @@ exports.usersDeletePost = (req, res) => {
   usersStorage.deleteUser(req.params.id);
   res.redirect("/");
 };
+
+exports.usersSearchGet = (req,res) => {
+    const name = req.query.name
+    const email = req.query.email
+    const users = usersStorage.getUsers()
+    users.forEach(user=>{
+        const fullName = user.firstName + " " + user.lastName
+        const userEmail = user.email
+        console.log(name, fullName)
+        console.log(email,userEmail)
+        if (fullName === name & userEmail === email){
+            return res.render("search.ejs",{
+                title: "Search User",
+                user:user
+            })
+        }
+    })
+    return res.status(400).render("createUser", {
+        title: "Create user",
+        errors: ["No user found",],
+      });
+}
