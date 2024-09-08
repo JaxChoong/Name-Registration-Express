@@ -104,6 +104,6 @@ exports.usersSearchGet = (req,res) => {
     })
     return res.status(400).render("createUser", {
         title: "Create user",
-        errors: ["No user found",],
+        errors: [{msg:"No user found"},],
       });
 }
