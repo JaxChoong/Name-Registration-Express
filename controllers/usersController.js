@@ -62,8 +62,8 @@ exports.usersUpdateGet = (req, res) => {
           errors: errors.array(),
         });
       }
-      const { firstName, lastName } = req.body;
-      usersStorage.updateUser(req.params.id, { firstName, lastName });
+      const { firstName, lastName, email, age, bio } = req.body;
+      usersStorage.updateUser(req.params.id, { firstName, lastName, email, age, bio });
       res.redirect("/");
     }
   ];
